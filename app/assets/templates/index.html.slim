@@ -1,2 +1,33 @@
-| INDEX PAGE
+h2
+  | Digs
+ul
+  li ng-repeat="dig in digs | orderBy:'rating':true"
+    span ng-hide="dig._edit" style="margin-right: 10px;"
+      | {{ dig.title }} by {{dig.owner_id}} on {{dig.created_at | date: short}}
+    input ng-model="dig.title" ng-show="dig._edit"
+    input ng-model="dig.body" ng-show="dig._edit"
+    input type="number" ng-model="dig.owner_id" ng-show="dig._edit"
+    button type="button" ng-click="edit(dig)" ng-hide="dig._edit"
+      | Edit
+    button type="button" ng-click="save(dig)" ng-show="dig._edit"
+      | Save
+    button type="button" ng-click="delete(dig)"
+      | Destroy
+    br
+    span style="margin-right: 10px"
+      |  Votes: {{ dig.rating }}
+    button type="button" ng-click="vote(+1, dig)"
+      | +1
+    button type="button" ng-click="vote(-1, dig)"
+      | -1
+
+form ng-submit="submit()"
+  input ng-model="newDig.title" placeholder="title"
+  br
+  input ng-model="newDig.body" placeholder="body"
+  br
+  input type="number" ng-model="newDig.owner_id" placeholder="owner_id"
+  br
+  input type="submit" value="Submit"
+
 

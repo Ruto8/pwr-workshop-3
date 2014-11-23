@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+
   namespace :api do
+    resources :digs
+  	post '/digs/:id/vote', to: 'digs#vote'
   end
 
   get 'api' => proc { [404, {}, ['Invalid API endpoint']] }

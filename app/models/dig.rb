@@ -5,5 +5,9 @@ class Dig < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   validates :title, :owner_id, presence: true
+
+  def as_json(opts={})
+  	super.merge(rating: votes.sum(:amount))
+	end
 end
 
